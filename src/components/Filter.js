@@ -3,24 +3,33 @@ import React, { useState } from 'react';
 const FilterComponent = ({ onFilter }) => {
   const [quantity, setQuantity] = useState('');
 
-  const handleFilterChange = (e) => {
-    setQuantity(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleFilter = () => {
+    // Pass the quantity value to the parent component for filtering
     onFilter(quantity);
   };
 
   return (
-    <div className="filter-component">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Quantity:
-          <input type="number" value={quantity} onChange={handleFilterChange} />
-        </label>
-        <button type="submit">Apply Filter</button>
-      </form>
+    <div className="row">
+      <div className="col-md-4">
+        <div className="input-group mb-3">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Enter Quantity"
+            value={quantity}
+            onChange={e => setQuantity(e.target.value)}
+          />&nbsp;
+          <div className="input-group-append">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleFilter}
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
